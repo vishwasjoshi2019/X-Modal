@@ -56,6 +56,7 @@ const XModal = () => {
 
   return (
     <div>
+    <h1>User Details Form</h1>
       <Button variant="contained" onClick={() => setIsModalOpen(true)}>Open Form</Button>
       
       <Modal
