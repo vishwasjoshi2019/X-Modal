@@ -54,6 +54,12 @@ const XModal = () => {
     }
   };
 
+  const handleBackdropClick = (e) => {
+    if (e.target.classList.contains('MuiBackdrop-root')) {
+      setIsModalOpen(false);
+    }
+  };
+
   return (
     <div>
       <h1>User Details Form</h1>
@@ -64,8 +70,9 @@ const XModal = () => {
         onClose={(e, reason) => handleClose(e, reason)}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
+        onClick={handleBackdropClick}
       >
-        <Box sx={style} className="modal">
+        <Box sx={style} className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">
             <Typography id="modal-title" variant="h6" component="h2">
               Fill Details
@@ -98,6 +105,8 @@ const XModal = () => {
                 label="Phone Number"
                 value={formData.phone}
                 onChange={handleInputChange}
+                error={!!errors.phone}
+                helperText={errors.phone}
               />
               <TextField
                 fullWidth
@@ -107,6 +116,8 @@ const XModal = () => {
                 type="date"
                 value={formData.dob}
                 onChange={handleInputChange}
+                error={!!errors.dob}
+                helperText={errors.dob}
                 InputLabelProps={{
                   shrink: true,
                 }}
