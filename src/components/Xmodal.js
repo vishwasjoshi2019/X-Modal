@@ -49,19 +49,19 @@ const XModal = () => {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'backdropClick') {
+    if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
       setIsModalOpen(false);
     }
   };
 
   return (
     <div>
-    <h1>User Details Form</h1>
+      <h1>User Details Form</h1>
       <Button variant="contained" onClick={() => setIsModalOpen(true)}>Open Form</Button>
       
       <Modal
         open={isModalOpen}
-        onClose={handleClose}
+        onClose={(e, reason) => handleClose(e, reason)}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
@@ -98,8 +98,6 @@ const XModal = () => {
                 label="Phone Number"
                 value={formData.phone}
                 onChange={handleInputChange}
-                error={!!errors.phone}
-                helperText={errors.phone}
               />
               <TextField
                 fullWidth
@@ -109,8 +107,6 @@ const XModal = () => {
                 type="date"
                 value={formData.dob}
                 onChange={handleInputChange}
-                error={!!errors.dob}
-                helperText={errors.dob}
                 InputLabelProps={{
                   shrink: true,
                 }}
