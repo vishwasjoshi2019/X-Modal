@@ -48,11 +48,11 @@ const XModal = () => {
     }
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
-      setIsModalOpen(false);
-    }
-  };
+  // const handleClose = (event, reason) => {
+  //   if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
+  //     setIsModalOpen(false);
+  //   }
+  // };
 
   return (
     <div>
@@ -61,7 +61,7 @@ const XModal = () => {
       
       <Modal
         open={isModalOpen}
-        onClose={handleClose}
+        onClose={()=>{setIsModalOpen(false)}}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
