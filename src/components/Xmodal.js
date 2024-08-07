@@ -54,12 +54,6 @@ const XModal = () => {
     }
   };
 
-  const handleBackdropClick = (e) => {
-    if (e.target.classList.contains('MuiBackdrop-root')) {
-      setIsModalOpen(false);
-    }
-  };
-
   return (
     <div>
       <h1>User Details Form</h1>
@@ -67,10 +61,9 @@ const XModal = () => {
       
       <Modal
         open={isModalOpen}
-        onClose={(e, reason) => handleClose(e, reason)}
+        onClose={handleClose}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
-        onClick={handleBackdropClick}
       >
         <Box sx={style} className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">
