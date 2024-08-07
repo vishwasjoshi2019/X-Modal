@@ -103,7 +103,7 @@ const XModal = () => {
                   />
                   {errors.dob && <p className="error">{errors.dob}</p>}
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className="submit-button">Submit</button>
               </form>
             </div>
           </div>
