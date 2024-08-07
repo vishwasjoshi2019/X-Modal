@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import './Xmodal.css'; // Create and import a CSS file for styling
 
 const XModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,94 +48,69 @@ const XModal = () => {
     }
   };
 
-  // const handleClose = (event, reason) => {
-  //   if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
-  //     setIsModalOpen(false);
-  //   }
-  // };
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
       <h1>User Details Form</h1>
-      <Button variant="contained" onClick={() => setIsModalOpen(true)}>Open Form</Button>
+      <button onClick={() => setIsModalOpen(true)}>Open Form</button>
       
-      <Modal
-        open={isModalOpen}
-        onClose={()=>{setIsModalOpen(false)}}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Box sx={style} className="modal" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-content">
-            <Typography id="modal-title" variant="h6" component="h2">
-              Fill Details
-            </Typography>
-            <form onSubmit={handleSubmit} noValidate>
-              <TextField
-                fullWidth
-                margin="normal"
-                id="username"
-                label="Username"
-                value={formData.username}
-                onChange={handleInputChange}
-                error={!!errors.username}
-                helperText={errors.username}
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                id="email"
-                label="Email Address"
-                value={formData.email}
-                onChange={handleInputChange}
-                error={!!errors.email}
-                helperText={errors.email}
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                id="phone"
-                label="Phone Number"
-                value={formData.phone}
-                onChange={handleInputChange}
-                error={!!errors.phone}
-                helperText={errors.phone}
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                id="dob"
-                label="Date of Birth"
-                type="date"
-                value={formData.dob}
-                onChange={handleInputChange}
-                error={!!errors.dob}
-                helperText={errors.dob}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <Button type="submit" variant="contained" color="primary" className="submit-button">
-                Submit
-              </Button>
-            </form>
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={handleClose}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-content">
+              <h2>Fill Details</h2>
+              <form onSubmit={handleSubmit} noValidate>
+                <div>
+                  <label htmlFor="username">Username</label>
+                  <input
+                    id="username"
+                    type="text"
+                    value={formData.username}
+                    onChange={handleInputChange}
+                  />
+                  {errors.username && <p className="error">{errors.username}</p>}
+                </div>
+                <div>
+                  <label htmlFor="email">Email Address</label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                  {errors.email && <p className="error">{errors.email}</p>}
+                </div>
+                <div>
+                  <label htmlFor="phone">Phone Number</label>
+                  <input
+                    id="phone"
+                    type="text"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                  />
+                  {errors.phone && <p className="error">{errors.phone}</p>}
+                </div>
+                <div>
+                  <label htmlFor="dob">Date of Birth</label>
+                  <input
+                    id="dob"
+                    type="date"
+                    value={formData.dob}
+                    onChange={handleInputChange}
+                  />
+                  {errors.dob && <p className="error">{errors.dob}</p>}
+                </div>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
           </div>
-        </Box>
-      </Modal>
+        </div>
+      )}
     </div>
   );
-};
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
 };
 
 export default XModal;
